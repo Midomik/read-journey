@@ -12,8 +12,18 @@ export const Home = () => {
     <>
       <Dashboard>
         <Form className="mb-[20px] " label="Filters:" submit={onSubmit}>
-          <Input name="title" title="Book title:" variant="primary" />
-          <Input name="author" title="The author:" variant="primary" />
+          <Input
+            name="title"
+            title="Book title:"
+            variant="primary"
+            placeholder="Enter the text"
+          />
+          <Input
+            name="author"
+            title="The author:"
+            variant="primary"
+            placeholder="Enter the text"
+          />
           <Button className="mr-auto mt-[12px]" type="submit">
             To apply
           </Button>
