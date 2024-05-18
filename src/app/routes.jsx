@@ -1,28 +1,37 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import App from './App';
-import {
-  Home,
-  Login,
-  Register,
-  MyReading,
-  MyLibrary,
-  NotFound,
-} from '../pages';
+import { Home, Auth, MyReading, MyLibrary, NotFound } from '../pages';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { refreshThunk } from '../features/redux/auth/operations';
+import { PrivateRoute } from '../app/providers/PrivateRoute';
+import { PublicRoute } from '../app/providers/PublicRoute';
 
 export const Router = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="reading" element={<MyReading />} />
-          <Route path="library" element={<MyLibrary />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+  const dispatch = useDispatch();
 
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+  useEffect(() => {
+    dispatch(refreshThunk());
+  }, [dispatch]);
+
+  return (
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route index element={<PrivateRoute component={<Home />} />} />
+        <Route
+          path="reading"
+          element={<PrivateRoute component={<MyReading />} />}
+        />
+        <Route
+          path="library"
+          element={<PrivateRoute component={<MyLibrary />} />}
+        />
+
+        <Route path="*" element={<NotFound />} />
+      </Route>
+
+      <Route path="login" element={<PublicRoute component={<Auth />} />} />
+      <Route path="register" element={<PublicRoute component={<Auth />} />} />
+    </Routes>
   );
 };

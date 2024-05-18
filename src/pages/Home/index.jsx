@@ -1,6 +1,7 @@
 import { Button } from '../../shared/ui/Button';
 import { Dashboard } from '../../shared/ui/Dashboard';
 import { GetStarted } from '../../shared/ui/Dashboard/Home/GetStarted';
+import { Quote } from '../../shared/ui/Dashboard/Home/Quote';
 import { Form } from '../../shared/ui/Form';
 import { Input } from '../../shared/ui/Input';
 
@@ -9,7 +10,7 @@ export const Home = () => {
     console.log(values);
   };
   return (
-    <>
+    <div>
       <Dashboard>
         <Form className="mb-[20px] " label="Filters:" submit={onSubmit}>
           <Input
@@ -29,7 +30,8 @@ export const Home = () => {
           </Button>
         </Form>
         <GetStarted />
+        <Quote />
       </Dashboard>
-    </>
+    </div>
   );
 };

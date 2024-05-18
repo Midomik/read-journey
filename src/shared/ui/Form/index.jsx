@@ -2,13 +2,15 @@ import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 import React from 'react';
-import { Button } from '../Button';
+import { Input } from '../Input';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 export const Form = ({
   defaultValues,
   className,
   submit,
   label,
+  validationSchema,
   children,
   ...rest
 }) => {
@@ -16,23 +18,32 @@ export const Form = ({
     register,
     handleSubmit,
     reset,
-    // formState: { errors },
+    unregister,
+    formState: { errors, touchedFields },
   } = useForm({
-    defaultValues: { defaultValues },
-    // resolver: yupResolver(signInModalSchema),
+    mode: 'onBlur',
+    defaultValues: defaultValues,
+    resolver: validationSchema ? yupResolver(validationSchema) : undefined,
   });
 
   const childrenWithProps = React.Children.map(children, (child) => {
-    if (child.type !== Button) {
-      return React.cloneElement(child, { register });
+    if (child?.type === Input) {
+      return React.cloneElement(child, {
+        register,
+        unregister,
+        errors,
+        touchedFields,
+        validate: validationSchema ? true : false,
+      });
     }
     return child;
   });
 
   const onSubmit = (data, event) => {
     event.preventDefault();
+    console.log(errors);
     submit(data);
-    reset;
+    reset();
   };
   return (
     <form
@@ -41,7 +52,7 @@ export const Form = ({
       {...rest}
     >
       {label && (
-        <p className="desktop:ml-[34px] ml-[14px] leading-[129%]">{label}</p>
+        <p className="ml-[14px] leading-[129%] desktop:ml-[34px]">{label}</p>
       )}
       {childrenWithProps}
     </form>
@@ -54,4 +65,5 @@ Form.propTypes = {
   submit: PropTypes.func,
   label: PropTypes.string,
   children: PropTypes.node.isRequired,
+  validationSchema: PropTypes.any,
 };
