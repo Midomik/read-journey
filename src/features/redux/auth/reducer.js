@@ -41,13 +41,21 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(refreshThunk.fulfilled, (state, { payload }) => {
-        console.log(payload);
+       
 
         state.userData = payload;
         state.token = payload.token;
         state.authenticated = true;
         state.isLoading = false;
         state.error = null;
+      })
+      .addCase(refreshThunk.rejected, (state, { payload }) => {
+        console.log('token: timeout', payload);
+
+        state.token = null;
+        state.authenticated = false;
+        state.isLoading = false;
+        state.error = payload;
       })
       .addMatcher(isAnyOf(logOutThunk.fulfilled, logOutThunk.rejected), () => {
         return initialState;

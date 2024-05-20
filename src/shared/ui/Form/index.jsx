@@ -12,6 +12,7 @@ export const Form = ({
   label,
   validationSchema,
   children,
+  isReset = true,
   ...rest
 }) => {
   const {
@@ -41,9 +42,9 @@ export const Form = ({
 
   const onSubmit = (data, event) => {
     event.preventDefault();
-    console.log(errors);
+    // console.log(errors);
     submit(data);
-    reset();
+    isReset ? reset() : null;
   };
   return (
     <form
@@ -66,4 +67,5 @@ Form.propTypes = {
   label: PropTypes.string,
   children: PropTypes.node.isRequired,
   validationSchema: PropTypes.any,
+  isReset: PropTypes.bool,
 };

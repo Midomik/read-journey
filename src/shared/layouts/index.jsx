@@ -8,6 +8,7 @@ import { logOutThunk } from '../../features/redux/auth/operations';
 
 export const SharedLayout = ({ children }) => {
   const dispatch = useDispatch();
+
   return (
     <div>
       <header className="mb-[16px] flex items-center justify-between rounded-[15px] bg-gray-1f p-[16px]">

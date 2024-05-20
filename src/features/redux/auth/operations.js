@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { instance } from '../API/axios';
-// import Notiflix from 'notiflix';
-
+import { Notify } from 'notiflix';
 const setToken = (token) => {
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
@@ -19,6 +18,12 @@ export const registerThunk = createAsyncThunk(
 
       return data;
     } catch (error) {
+      error.response.status === 409
+        ? Notify.failure(`Error! Account is already exist!`, {
+            timeout: 3000,
+          })
+        : null;
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -29,10 +34,15 @@ export const loginThunk = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const res = await instance.post(`/users/signin`, data);
-      console.log(res);
 
       return res.data;
     } catch (error) {
+      error.response.status === 401
+        ? Notify.failure(`Error! You enter invalid email or password`, {
+            timeout: 3000,
+          })
+        : null;
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
