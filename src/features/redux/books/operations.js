@@ -15,3 +15,15 @@ export const getRecomendedBooks = createAsyncThunk(
     }
   }
 );
+
+export const addFromRecomend = createAsyncThunk(
+  'books/addFromRecomend',
+  async (id, thunkAPI) => {
+    try {
+      const res = await instance.post(`/books/add/${id}`);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

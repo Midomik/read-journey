@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 export const MovieCard = ({ title, author, imageUrl }) => {
   return (
-    <>
+    < >
       <img
         className="mb-[8px] h-[208px] w-[137px] rounded-[8px]"
         src={imageUrl}
