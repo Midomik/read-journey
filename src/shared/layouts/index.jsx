@@ -3,11 +3,21 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button } from '../ui/Button';
 import { Logo } from '../ui/Logo';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOutThunk } from '../../features/redux/auth/operations';
+import {
+  selectIsOpenAddToLibraryModal,
+  selectIsOpenStartReadingModal,
+  selectisOpenSuccAddModal,
+} from '../../features/redux/books/selectors';
+import { Modal } from '../ui/Modal';
 
 export const SharedLayout = ({ children }) => {
   const dispatch = useDispatch();
+
+  const isOpenAddToLibraryModal = useSelector(selectIsOpenAddToLibraryModal);
+  const isOpenSuccAddModal = useSelector(selectisOpenSuccAddModal);
+  const isOpenStartReadingModal = useSelector(selectIsOpenStartReadingModal);
 
   return (
     <div>
@@ -34,6 +44,16 @@ export const SharedLayout = ({ children }) => {
         </div>
       </header>
       <main>{children}</main>
+
+      {isOpenAddToLibraryModal && <Modal />}
+      {isOpenStartReadingModal && <Modal />}
+
+      {isOpenSuccAddModal && (
+        <Modal
+          variant="succAdd"
+          className="min-h-[290px] w-[342px] justify-center"
+        />
+      )}
     </div>
   );
 };

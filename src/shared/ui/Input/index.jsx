@@ -24,15 +24,15 @@ export const Input = ({
   title,
   //   variant,
   //   className,
-  register,
-  unregister,
-  validate,
   isRegister = true,
-  errors,
-  touchedFields,
   type = 'text',
   eyeIcon,
   checkPassword,
+  register,
+  unregister,
+  touchedFields,
+  validate,
+  errors,
   ...rest
 }) => {
   if (!register) return null;

@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import App from './App';
-import { Home, Auth, MyReading, MyLibrary, NotFound } from '../pages';
+import { Home, Auth, Reading, MyLibrary, NotFound } from '../pages';
 import { PrivateRoute } from '../app/providers/PrivateRoute';
 import { PublicRoute } from '../app/providers/PublicRoute';
 
@@ -10,12 +10,13 @@ export const Router = () => {
       <Route path="/" element={<App />}>
         <Route index element={<PrivateRoute component={<Home />} />} />
         <Route
-          path="reading"
-          element={<PrivateRoute component={<MyReading />} />}
-        />
-        <Route
           path="library"
           element={<PrivateRoute component={<MyLibrary />} />}
+        />
+
+        <Route
+          path="reading/:bookId"
+          element={<PrivateRoute component={<Reading />} />}
         />
 
         <Route path="*" element={<NotFound />} />

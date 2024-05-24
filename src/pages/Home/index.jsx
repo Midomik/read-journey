@@ -13,23 +13,24 @@ import { useEffect, useState } from 'react';
 import { refreshThunk } from '../../features/redux/auth/operations';
 import {
   selectBooks,
-  selectIsOpenModal,
+  selectIsOpenStartReadingModal,
   selectModalData,
   selectPageData,
   selectisOpenSuccAddModal,
 } from '../../features/redux/books/selectors';
 import { MovieCard } from '../../shared/ui/MovieCard/MovieCard';
 import { PaginBar } from '../../shared/ui/PaginBar';
-import { setIsOpenModal } from '../../features/redux/books/reducer';
+// import { setIsOpenModal } from '../../features/redux/books/reducer';
 import { Modal } from '../../shared/ui/Modal';
+import { setIsOpenAddToLibraryModal } from '../../features/redux/books/reducer';
 
 export const Home = () => {
   const dispatch = useDispatch();
   const books = useSelector(selectBooks);
   const pageData = useSelector(selectPageData);
-  const isOpenModal = useSelector(selectIsOpenModal);
   const modalData = useSelector(selectModalData);
   const isOpenSuccAddModal = useSelector(selectisOpenSuccAddModal);
+  const isOpenStartReadingModal = useSelector(selectIsOpenStartReadingModal);
 
   const [filterQuery, setFilterQuery] = useState(null);
 
@@ -81,7 +82,7 @@ export const Home = () => {
 
   const addToLibrary = () => {
     dispatch(addFromRecomend(modalData?._id));
-    dispatch(setIsOpenModal());
+    // dispatch(setIsOpenModal());
   };
 
   return (
@@ -134,7 +135,7 @@ export const Home = () => {
                 const { _id, title, author, imageUrl } = book;
                 return (
                   <li
-                    onClick={() => dispatch(setIsOpenModal(book))}
+                    onClick={() => dispatch(setIsOpenAddToLibraryModal(book))}
                     key={_id}
                     className="w-[137px]"
                   >
@@ -150,7 +151,7 @@ export const Home = () => {
           </ul>
         </div>
       </div>
-      {isOpenModal && (
+      {isOpenStartReadingModal && (
         <Modal>
           <img
             src={modalData?.imageUrl}

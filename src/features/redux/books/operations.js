@@ -27,3 +27,106 @@ export const addFromRecomend = createAsyncThunk(
     }
   }
 );
+
+export const getOwnBooks = createAsyncThunk(
+  'books/getOwnBooks',
+  async (data, thunkAPI) => {
+    try {
+      const res = await instance.get(
+        `/books/own/?${data ? `status=${data}` : ''}`
+      );
+      console.log(res);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteOwnBook = createAsyncThunk(
+  'books/deleteOwnBook',
+  async ({ id }, thunkAPI) => {
+    try {
+      console.log(id);
+
+      const res = await instance.delete(`/books/remove/${id}`);
+      console.log(res);
+      return id;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addFromLibrary = createAsyncThunk(
+  'books/addFromLibrary',
+  async (formData, thunkAPI) => {
+    try {
+      const { data } = await instance.post(`/books/add`, formData);
+      console.log(data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getBookById = createAsyncThunk(
+  'books/getBookById',
+  async (id, thunkAPI) => {
+    try {
+      const { data } = await instance.get(`/books/${id}`);
+      console.log(data);
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const startReading = createAsyncThunk(
+  'books/startReading',
+  async (readingData, thunkAPI) => {
+    try {
+      const { data } = await instance.post(`/books/reading/start`, readingData);
+      console.log(data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const finishReading = createAsyncThunk(
+  'books/finishReading',
+  async (readingData, thunkAPI) => {
+    try {
+      const { data } = await instance.post(
+        `/books/reading/finish`,
+        readingData
+      );
+      console.log(data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteReading = createAsyncThunk(
+  'books/deleteReading',
+  async (readingData, thunkAPI) => {
+    try {
+      console.log(readingData);
+
+      const { data } = await instance.delete(
+        `/books/reading/?bookId=${readingData.bookId}&readingId=${readingData.readingId}`
+      );
+      console.log(data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
