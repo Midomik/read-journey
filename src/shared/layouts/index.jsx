@@ -6,6 +6,7 @@ import { Logo } from '../ui/Logo';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutThunk } from '../../features/redux/auth/operations';
 import {
+  selectBooksLoading,
   selectIsOpenAddToLibraryModal,
   selectIsOpenBurgerMenu,
   selectIsOpenEndBookModal,
@@ -13,7 +14,10 @@ import {
   selectisOpenSuccAddModal,
 } from '../../features/redux/books/selectors';
 import { Modal } from '../ui/Modal';
-import { selectUserData } from '../../features/redux/auth/selectors';
+import {
+  selectAuthLoading,
+  selectUserData,
+} from '../../features/redux/auth/selectors';
 import { BurgerMenuIcon } from '../assets/icons/BurgerMenuIcon';
 import { CloseIcon } from '../assets/icons/CloseIcon';
 import { useEffect } from 'react';
@@ -21,6 +25,7 @@ import {
   closeModals,
   setIsOpenBurgerMenu,
 } from '../../features/redux/books/reducer';
+import { Loader } from '../ui/Loader/Loader';
 
 export const SharedLayout = ({ children }) => {
   const dispatch = useDispatch();
@@ -30,6 +35,8 @@ export const SharedLayout = ({ children }) => {
   const isOpenStartReadingModal = useSelector(selectIsOpenStartReadingModal);
   const isOpenEndBookModal = useSelector(selectIsOpenEndBookModal);
   const isOpenBurgerMenu = useSelector(selectIsOpenBurgerMenu);
+  const isAuthLoading = useSelector(selectAuthLoading);
+  const isBooksLoading = useSelector(selectBooksLoading);
   const userData = useSelector(selectUserData);
   console.log(userData);
 
@@ -149,6 +156,9 @@ export const SharedLayout = ({ children }) => {
           </div>
         </div>
       )}
+
+      {isAuthLoading && <Loader />}
+      {isBooksLoading && <Loader />}
     </div>
   );
 };

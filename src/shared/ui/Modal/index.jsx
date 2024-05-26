@@ -16,6 +16,7 @@ import {
 import { Button } from '../Button';
 import { addFromRecomend } from '../../../features/redux/books/operations';
 import { useNavigate } from 'react-router-dom';
+import bookPlaceholder from '../../assets/images/png/book-placeholder.png';
 
 export const Modal = ({ className, variant = 'default', size = 'small' }) => {
   const dispatch = useDispatch();
@@ -79,14 +80,14 @@ export const Modal = ({ className, variant = 'default', size = 'small' }) => {
   const defaultVariant = (
     <>
       <img
-        src={modalData?.imageUrl}
+        src={modalData?.imageUrl ? modalData?.imageUrl : bookPlaceholder}
         alt={modalData?.title}
         className="mb-[16px] h-[213px] w-[153px] rounded-[8px]"
       />
-      <h3 className="mb-[2px] text-[20px] font-[700] leading-[100%] ">
+      <h3 className="mb-[2px] font-[700] leading-[100%] mobile-sm:text-[18px] tablet:text-[20px] ">
         {modalData?.title}
       </h3>
-      <p className="mb-[4px] leading-[129%] text-gray-68">
+      <p className="mb-[4px] leading-[129%] text-gray-68  mobile-sm:text-[12px] tablet:text-[14px]">
         {modalData?.author}
       </p>
       <p className="mb-[32px] text-[10px] leading-[120%]">
@@ -125,10 +126,10 @@ export const Modal = ({ className, variant = 'default', size = 'small' }) => {
   return (
     <div
       onClick={closeFromOverlay}
-      className="fixed left-0 top-0 h-[100vh] w-[100vw] bg-[#14141499]"
+      className="fixed left-0 top-0 z-[50] h-[100vh] w-[100vw] bg-[#14141499]"
     >
       <div
-        className={`absolute left-[50%] top-[50%] box-border flex  ${size === 'small' ? 'min-h-[290px] w-[342px]' : 'min-h-[400px] w-[500px]'} translate-x-[-50%] translate-y-[-50%] flex-col items-center overflow-y-auto rounded-[12px] bg-gray-1f p-[50px] ${className}`}
+        className={` absolute left-[50%] top-[50%] box-border flex mobile-sm:w-[335px]    ${size === 'small' ? 'min-h-[290px] w-[342px] ' : 'min-h-[400px] w-[500px] tablet:min-h-[400px] tablet:w-[500px]'} translate-x-[-50%] translate-y-[-50%] flex-col items-center overflow-y-auto rounded-[12px] bg-gray-1f p-[50px] ${className}`}
       >
         <button
           onClick={closeModal}

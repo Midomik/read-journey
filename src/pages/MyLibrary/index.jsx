@@ -53,7 +53,7 @@ export const MyLibrary = () => {
   };
 
   return (
-    <div className="flex gap-[16px] mobile-sm:flex-col desktop:flex-row">
+    <div className="flex mobile-sm:flex-col mobile-sm:gap-[10px] tablet:gap-[16px] desktop:flex-row">
       <Dashboard className=" tablet:flex tablet:justify-center tablet:gap-[32px] desktop:block ">
         <Form
           label="Create your library"

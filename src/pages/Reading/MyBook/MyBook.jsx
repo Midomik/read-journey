@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { StartReadIcon } from '../../../shared/assets/icons/StartReadIcon';
 import { StopReadIcon } from '../../../shared/assets/icons/StopReadIcon';
+import bookPlaceholderBig from '../../../shared/assets/images/png/book-placeholder-big.png';
 
 export const MyBook = ({ bookData, timeLeftToRead }) => {
   const { imageUrl, title, author } = bookData;
@@ -29,9 +30,9 @@ export const MyBook = ({ bookData, timeLeftToRead }) => {
 
       <div className="flex flex-col items-center gap-[20px]">
         <img
-          src={imageUrl}
+          src={imageUrl ? imageUrl : bookPlaceholderBig}
           alt={title}
-          className=" desktop::w-[224px] rounded-[8px] mobile-sm:w-[146px] tablet:w-[169px]"
+          className=" rounded-[8px] mobile-sm:w-[146px] tablet:w-[169px] desktop:w-[224px]"
         />
         <div>
           <p className=" mb-[4px] text-center font-[700] leading-[100%] tracking-[-0.02em] mobile-sm:w-[146px] mobile-sm:text-[14px] tablet:w-auto tablet:text-[20px]">

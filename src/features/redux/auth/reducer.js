@@ -41,11 +41,23 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(refreshThunk.fulfilled, (state, { payload }) => {
-       
-
         state.userData = payload;
         state.token = payload.token;
         state.authenticated = true;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(logOutThunk.fulfilled, (state) => {
+        state.userData = null;
+        state.token = null;
+        state.authenticated = false;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(logOutThunk.rejected, (state) => {
+        state.userData = null;
+        state.token = null;
+        state.authenticated = false;
         state.isLoading = false;
         state.error = null;
       })

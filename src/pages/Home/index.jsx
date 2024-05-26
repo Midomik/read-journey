@@ -23,6 +23,7 @@ import { PaginBar } from '../../shared/ui/PaginBar';
 // import { setIsOpenModal } from '../../features/redux/books/reducer';
 import { Modal } from '../../shared/ui/Modal';
 import { setIsOpenAddToLibraryModal } from '../../features/redux/books/reducer';
+import booksBigImg from '../../shared/assets/images/png/books-img-big.png';
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -96,7 +97,7 @@ export const Home = () => {
 
   return (
     <>
-      <div className=" flex flex-col mobile-sm:gap-[10px] tablet:gap-[16px]">
+      <div className=" flex mobile-sm:flex-col mobile-sm:gap-[10px] tablet:gap-[16px] desktop:flex-row">
         <Dashboard className="tablet:flex tablet:justify-center tablet:gap-[30px] tablet:p-[32px] desktop:block ">
           <Form
             className="mobile-sm:mb-[20px] desktop:mb-[20px]"
@@ -158,6 +159,23 @@ export const Home = () => {
                 );
               })}
           </ul>
+
+          {books?.length === 0 && (
+            <div className="flex h-full flex-col items-center justify-center ">
+              <div className="mb-[20px] flex h-[130px] w-[130px] items-center justify-center rounded-full bg-gray-26">
+                <img
+                  src={booksBigImg}
+                  alt="books placeholder"
+                  className="h-[70px] w-[70px]"
+                />
+              </div>
+              <p className="w-[274px] text-center leading-[129%] tracking-[-0.02em]">
+                Sorry, no books found. Please try adjusting{' '}
+                <span className="text-gray-68">your search</span> check for
+                typos.
+              </p>
+            </div>
+          )}
         </div>
       </div>
       {isOpenStartReadingModal && (

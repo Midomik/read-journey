@@ -116,7 +116,7 @@ const booksSlice = createSlice({
       })
       .addCase(finishReading.fulfilled, (state, { payload }) => {
         console.log(payload);
-        document.body.classList.add('add-overflov');
+        // document.body.classList.add('add-overflov');
         state.modalVariants.isOpenEndBookModal = payload.status === 'done';
 
         state.bookData = payload;
