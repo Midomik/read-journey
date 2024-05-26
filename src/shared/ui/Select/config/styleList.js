@@ -16,7 +16,14 @@ export const styleList = {
   }),
   container: (base) => ({
     ...base,
-    width: '153px',
+
+    [`@media (min-width: 320px)`]: {
+      width: '120px',
+    },
+
+    [`@media (min-width: 768px)`]: {
+      width: '153px',
+    },
   }),
   control: (base) => ({
     ...base,
@@ -27,7 +34,14 @@ export const styleList = {
     '&:hover': {
       borderColor: '#3e3e3e',
     },
-    height: '46px',
+
+    [`@media (min-width: 320px)`]: {
+      height: '40px',
+    },
+
+    [`@media (min-width: 768px)`]: {
+      height: '46px',
+    },
     lineHeight: '129%',
     paddingLeft: 6,
     // border: '1px solid rgba(25, 26, 21, 0.1)',
@@ -69,9 +83,17 @@ export const styleList = {
     ...base,
 
     // fontWeight: 500,
-    fontSize: 14,
+
+    [`@media (min-width: 320px)`]: {
+      fontSize: 12,
+    },
+
+    [`@media (min-width: 768px)`]: {
+      fontSize: 14,
+    },
     color: '#f9f9f9',
   }),
+
   indicatorSeparator: (provided) => ({
     ...provided,
     display: 'none',

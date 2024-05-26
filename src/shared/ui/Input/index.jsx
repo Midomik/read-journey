@@ -47,14 +47,14 @@ export const Input = ({
 
   const getInputClasses = (fieldName) => {
     if (!touchedFields[fieldName]) {
-      return 'border-none';
+      return 'border border-transparent';
     }
 
     return validate
       ? errors[fieldName]
-        ? 'border border-[#e90516]'
-        : 'border border-[#30b94d]'
-      : 'border-none';
+        ? 'border border-[#e90516] hover:border-[#e90516]'
+        : 'border border-[#30b94d] hover:border-[#30b94d]'
+      : 'border border-transparent';
   };
 
   return (
@@ -62,13 +62,13 @@ export const Input = ({
       {isRegister && (
         <div>
           <div
-            className={`relative flex h-[50px] w-full items-center gap-[10px] rounded-[12px] bg-gray-26 text-base text-white ${getInputClasses(name)}`}
+            className={`relative box-border flex w-full items-center gap-[10px] rounded-[12px] bg-gray-26  text-base text-white hover:border hover:border-[#f9f9f91a] mobile-sm:h-[44px] tablet:h-[50px] ${getInputClasses(name)}`}
           >
-            <span className="ml-[14px] flex h-full flex-shrink-0 flex-grow items-center text-[14px] text-gray-68">
+            <span className="ml-[14px] flex h-full flex-shrink-0 flex-grow items-center text-gray-68 mobile-sm:text-[12px] tablet:text-[14px]">
               {title}
             </span>
             <input
-              className=" h-full w-full rounded-[12px] border-none bg-transparent text-[14px] placeholder:text-[14px] placeholder:text-white focus:border-none focus:border-white focus:outline-none"
+              className=" h-full w-full rounded-[12px] border-none bg-transparent placeholder:text-white focus:border-none focus:border-white focus:outline-none mobile-sm:text-[12px] mobile-sm:placeholder:text-[12px] tablet:text-[14px] tablet:placeholder:text-[14px]"
               // className={cn(inputVariants({ variant, className }))}
               // {...(isRegister ? { ...register(name) } : '')}
               type={type}
@@ -77,7 +77,7 @@ export const Input = ({
               {...rest}
             />
 
-            <div className="absolute right-0 top-[50%] translate-x-[-50%] translate-y-[-50%] justify-center">
+            <div className="absolute right-0 top-[50%] translate-x-[-50%] translate-y-[-50%] justify-center ">
               <div
                 onMouseDown={() => checkPassword(true, 1)}
                 onMouseUp={() => checkPassword(false, 2)}
@@ -86,17 +86,19 @@ export const Input = ({
                 {eyeIcon}
               </div>
 
-              {getInputClasses(name) === 'border border-[#e90516]' && (
+              {getInputClasses(name) ===
+                'border border-[#e90516] hover:border-[#e90516]' && (
                 <ErrorIcon />
               )}
-              {getInputClasses(name) === 'border border-[#30b94d]' && (
+              {getInputClasses(name) ===
+                'border border-[#30b94d] hover:border-[#30b94d]' && (
                 <SuccIcon />
               )}
             </div>
           </div>
           {errors[name] && (
             <p
-              className={`ml-[14px] mt-[8px] text-[12px] leading-[117%] ${errors[name] ? 'text-[#e90516]' : 'text-[#30b94d]'}`}
+              className={`ml-[14px] mt-[8px] mobile-sm:text-[10px] mobile-sm:leading-[120%] tablet:text-[12px] tablet:leading-[117%] ${errors[name] ? 'text-[#e90516]' : 'text-[#30b94d]'}`}
             >
               {errors[name]?.message}
             </p>

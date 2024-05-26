@@ -16,7 +16,7 @@ import {
   selectBooks,
   selectOwnBooks,
 } from '../../features/redux/books/selectors';
-import { MovieCard } from '../../shared/ui/MovieCard/MovieCard';
+import { BookCard } from '../../shared/ui/BookCard/BookCard';
 import booksBigImg from '../../shared/assets/images/png/books-img-big.png';
 import { SelectUI } from '../../shared/ui/Select';
 import { createBookSchema } from '../../shared/ui/Form/shemas/createBookSchema';
@@ -53,8 +53,8 @@ export const MyLibrary = () => {
   };
 
   return (
-    <div className="flex gap-[16px]">
-      <Dashboard>
+    <div className="flex gap-[16px] mobile-sm:flex-col desktop:flex-row">
+      <Dashboard className=" tablet:flex tablet:justify-center tablet:gap-[32px] desktop:block ">
         <Form
           label="Create your library"
           isReset={true}
@@ -71,7 +71,9 @@ export const MyLibrary = () => {
 
       <div className="w-full rounded-[30px] bg-gray-1f p-[40px]">
         <div className="mb-[28px] flex justify-between">
-          <h2 className="text-[28px] font-[700] leading-[114%] ">My library</h2>
+          <h2 className="font-[700] leading-[114%] mobile-sm:text-[20px] tablet:text-[28px] ">
+            My library
+          </h2>
           <SelectUI onChange={getFilteredBooks} />
         </div>
 
@@ -85,7 +87,7 @@ export const MyLibrary = () => {
                   key={_id}
                   className="max-w-[137px]"
                 >
-                  <MovieCard
+                  <BookCard
                     id={_id}
                     title={title}
                     author={author}

@@ -1,11 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { instance } from '../API/axios';
+import { Notify } from 'notiflix';
 // import Notiflix from 'notiflix';
 
 export const getRecomendedBooks = createAsyncThunk(
   'books/recommend',
   async (data, thunkAPI) => {
     try {
+      console.log(data);
+
       const res = await instance.get(`/books/recommend`, {
         params: data,
       });
@@ -93,6 +96,14 @@ export const startReading = createAsyncThunk(
       console.log(data);
       return data;
     } catch (error) {
+      error.response.status === 409
+        ? Notify.failure(
+            `Error! This book is already read or you haven't finished reading this book`,
+            {
+              timeout: 3000,
+            }
+          )
+        : null;
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -109,6 +120,14 @@ export const finishReading = createAsyncThunk(
       console.log(data);
       return data;
     } catch (error) {
+      error.response.status === 409
+        ? Notify.failure(
+            `Error! This book is already read or you haven't finished reading this book`,
+            {
+              timeout: 3000,
+            }
+          )
+        : null;
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -126,6 +145,14 @@ export const deleteReading = createAsyncThunk(
       console.log(data);
       return data;
     } catch (error) {
+      error.response.status === 409
+        ? Notify.failure(
+            `Error! This book is already read or you haven't finished reading this book`,
+            {
+              timeout: 3000,
+            }
+          )
+        : null;
       return thunkAPI.rejectWithValue(error.message);
     }
   }

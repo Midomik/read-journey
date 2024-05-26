@@ -14,25 +14,16 @@ export const ReadingEvent = ({ eventData, totalPages, bookId }) => {
     const data = { readingId, bookId };
     dispatch(deleteReading(data));
   };
+  console.log(totalPages);
 
   return (
     <div className="flex flex-col gap-[28px]">
       {eventData.data
         .filter((item) => item.status !== 'active')
         .map((item) => {
-          const {
-            startReading,
-            startPage,
-            finishReading,
-            finishPage,
-            speed,
-            _id,
-          } = item;
+          const { startReading, finishReading, finishPage, speed, _id } = item;
 
-          const partOfBook = (
-            ((finishPage - startPage) * 100) /
-            totalPages
-          ).toFixed(1);
+          const partOfBook = ((finishPage * 100) / totalPages).toFixed(1);
           console.log();
 
           const differenceInMinutes = Math.floor(

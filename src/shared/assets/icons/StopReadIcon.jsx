@@ -1,8 +1,7 @@
 export const StopReadIcon = () => {
   return (
     <svg
-      width="50"
-      height="50"
+      className="mobile-sm:h-[40px] mobile-sm:w-[40px] tablet:h-[50px] tablet:w-[50px]"
       viewBox="0 0 50 50"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -55,13 +55,14 @@ export const Auth = () => {
     setIsvisiblePassword(value);
   };
 
-  const generalClass = 'bg-gray-1f  w-1/2 rounded-[30px] px-[64px] py-[40px] ';
+  const generalClass =
+    'bg-gray-1f   desktop:w-1/2 mobile-sm:w-full rounded-[30px] desktop:px-[64px] mobile-sm:px-[20px] desktop:pt-[40px] tablet:px-[64px] tablet:pt-[40px] mobile-sm:pt-[20px]';
   return (
-    <div className=" flex gap-[16px]">
-      <div className={generalClass}>
-        <Logo className=" mb-[107px]" />
+    <div className=" gap-[16px] mobile-sm:flex mobile-sm:flex-col desktop:flex desktop:flex-row">
+      <div className={` mobile-sm:pb-[20px] tablet:pb-[40px] ${generalClass}`}>
+        <Logo className=" mobile-sm:mb-[40px] tablet:mb-[157px] desktop:mb-[107px]" />
 
-        <h1 className=" mb-[40px] text-[64px] font-[700] leading-[94%] tracking-[0.02em] ">
+        <h1 className="font-[700] leading-[94%] tracking-[0.02em] mobile-sm:mb-[20px] mobile-sm:text-[32px] tablet:mb-[40px] tablet:max-w-[472px] tablet:text-[64px] desktop:text-[64px] ">
           Expand your mind, reading{' '}
           <span className="text-[#e3e3e380]">a book</span>
         </h1>
@@ -69,6 +70,7 @@ export const Auth = () => {
         <Form
           submit={page === 'register' ? onSubmitRegister : onSubmitLogin}
           validationSchema={page === 'register' ? registerSchema : loginSchema}
+          className="tablet:max-w-[472px] desktop:max-w-full"
         >
           <Input
             isRegister={page === 'register' ? true : false}
@@ -87,16 +89,17 @@ export const Auth = () => {
             checkPassword={checkPassword}
           />
 
-          <div className="mt-[82px] flex items-center gap-[14px]">
+          <div className="flex items-center gap-[14px] mobile-sm:mt-[20px] tablet:mt-[82px]">
             <Button
-              className="border-none bg-white text-[20px] font-[700] leading-[100%] text-gray-1f"
+              size="large"
+              className="border-none bg-white font-[700] leading-[100%] text-gray-1f mobile-sm:h-[42px] mobile-sm:px-[29px] mobile-sm:text-[14px] tablet:h-[54px] tablet:px-[54px] tablet:text-[20px] "
               type="submit"
             >
               {page === 'register' ? 'Registration' : 'Log In'}
             </Button>
             <Link
               to={page === 'register' ? '/login' : '/register'}
-              className="text-gray-68 underline"
+              className="text-gray-68 underline mobile-sm:text-[12px] tablet:text-[14px]"
             >
               {page === 'register'
                 ? 'Already have an account?'
@@ -106,7 +109,9 @@ export const Auth = () => {
         </Form>
       </div>
 
-      <div className={`flex items-end justify-center pb-0 ${generalClass}`}>
+      <div
+        className={` items-end justify-center ${generalClass} pb-0  mobile-sm:flex tablet:hidden desktop:flex`}
+      >
         <picture>
           <source
             type="image/webp"

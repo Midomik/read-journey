@@ -18,7 +18,7 @@ import {
   selectPageData,
   selectisOpenSuccAddModal,
 } from '../../features/redux/books/selectors';
-import { MovieCard } from '../../shared/ui/MovieCard/MovieCard';
+import { BookCard } from '../../shared/ui/BookCard/BookCard';
 import { PaginBar } from '../../shared/ui/PaginBar';
 // import { setIsOpenModal } from '../../features/redux/books/reducer';
 import { Modal } from '../../shared/ui/Modal';
@@ -33,14 +33,23 @@ export const Home = () => {
   const isOpenStartReadingModal = useSelector(selectIsOpenStartReadingModal);
 
   const [filterQuery, setFilterQuery] = useState(null);
+  const [limit, setLimit] = useState();
 
   useEffect(() => {
     dispatch(refreshThunk());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getRecomendedBooks());
-  }, [dispatch]);
+    if (window.innerWidth > 1440) {
+      setLimit(10);
+    } else if (window.innerWidth > 768) {
+      setLimit(8);
+    } else {
+      setLimit(2);
+    }
+
+    dispatch(getRecomendedBooks({ limit }));
+  }, [limit, dispatch]);
 
   const prevPage = () => {
     const obj = { page: pageData.page - 1 };
@@ -49,7 +58,7 @@ export const Home = () => {
         if (filterQuery?.title) obj.title = filterQuery.title;
         if (filterQuery?.author) obj.author = filterQuery.author;
       }
-      dispatch(getRecomendedBooks(obj));
+      dispatch(getRecomendedBooks({ ...obj, limit }));
     }
   };
 
@@ -60,7 +69,7 @@ export const Home = () => {
         if (filterQuery?.title) obj.title = filterQuery.title;
         if (filterQuery?.author) obj.author = filterQuery.author;
       }
-      dispatch(getRecomendedBooks(obj));
+      dispatch(getRecomendedBooks({ ...obj, limit }));
     }
   };
 
@@ -87,10 +96,10 @@ export const Home = () => {
 
   return (
     <>
-      <div className="flex gap-[16px]">
-        <Dashboard>
+      <div className=" flex flex-col mobile-sm:gap-[10px] tablet:gap-[16px]">
+        <Dashboard className="tablet:flex tablet:justify-center tablet:gap-[30px] tablet:p-[32px] desktop:block ">
           <Form
-            className="mb-[20px] "
+            className="mobile-sm:mb-[20px] desktop:mb-[20px]"
             label="Filters:"
             isReset={false}
             submit={onSubmit}
@@ -107,17 +116,17 @@ export const Home = () => {
               variant="primary"
               placeholder="Enter the text"
             />
-            <Button className="mr-auto mt-[12px]" type="submit">
+            <Button size="small" className="mr-auto mt-[12px]" type="submit">
               To apply
             </Button>
           </Form>
           <GetStarted />
-          <Quote />
+          <Quote className="mobile-sm:hidden desktop:flex" />
         </Dashboard>
 
-        <div className="w-full rounded-[30px] bg-gray-1f p-[40px]">
+        <div className="w-full rounded-[30px] bg-gray-1f mobile-sm:px-[20px] mobile-sm:py-[40px] tablet:p-[40px]">
           <div className="mb-[20px] flex items-start justify-between">
-            <h2 className="text-[28px] font-[700] leading-[114%]">
+            <h2 className="font-[700] leading-[114%] mobile-sm:text-[20px] tablet:text-[28px]">
               Recomended
             </h2>
 
@@ -129,7 +138,7 @@ export const Home = () => {
             />
           </div>
 
-          <ul className="flex flex-wrap gap-x-[20px] gap-y-[27px] ">
+          <ul className="flex flex-wrap mobile-sm:gap-x-[20px] tablet:gap-x-[25px] tablet:gap-y-[27px] desktop:gap-x-[20px]  ">
             {books &&
               books.map((book) => {
                 const { _id, title, author, imageUrl } = book;
@@ -139,7 +148,7 @@ export const Home = () => {
                     key={_id}
                     className="w-[137px]"
                   >
-                    <MovieCard
+                    <BookCard
                       id={_id}
                       title={title}
                       author={author}

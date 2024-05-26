@@ -3,6 +3,7 @@ export const ArrowIcon = () => {
     <svg
       width="24"
       height="24"
+      className="mobile-sm:h-[20px] mobile-sm:w-[20px] tablet:h-[24px] tablet:w-[24px]"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -52,7 +52,11 @@ export const Form = ({
       onSubmit={handleSubmit(onSubmit)}
       {...rest}
     >
-      {label && <p className="ml-[14px] leading-[129%]">{label}</p>}
+      {label && (
+        <p className="ml-[14px] leading-[129%] mobile-sm:text-[10px] tablet:text-[14px] ">
+          {label}
+        </p>
+      )}
       {childrenWithProps}
     </form>
   );

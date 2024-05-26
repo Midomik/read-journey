@@ -4,7 +4,7 @@ import { cva } from 'class-variance-authority';
 import { TrashIcon } from '../../assets/icons/TrashIcon';
 import imgPlaceholder from '../../assets/images/png/book-placeholder.png';
 
-export const MovieCard = ({
+export const BookCard = ({
   id,
   title,
   author,
@@ -85,7 +85,7 @@ export const MovieCard = ({
   );
 };
 
-MovieCard.propTypes = {
+BookCard.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
   author: PropTypes.string,

@@ -20,6 +20,8 @@ const initialState = {
     isOpenAddToLibraryModal: false,
     isOpenStartReadingModal: false,
     isOpenSuccAddModal: false,
+    isOpenEndBookModal: false,
+    isOpenBurgerMenu: false,
   },
   isLoading: false,
   error: null,
@@ -36,19 +38,28 @@ const booksSlice = createSlice({
     //   state.modalVariants.isOpenStartReadingModal = false;
     // },
     setIsOpenAddToLibraryModal: (state, { payload }) => {
+      document.body.classList.add('add-overflov');
       state.modalVariants.isOpenAddToLibraryModal = true;
       state.modalData = payload;
     },
     setIsOpenStartReadingModal: (state, { payload }) => {
+      document.body.classList.add('add-overflov');
       state.isOpenModal = !state.isOpenModal;
       state.modalVariants.isOpenStartReadingModal =
         !state.modalVariants.isOpenStartReadingModal;
       state.modalData = payload;
     },
+    setIsOpenBurgerMenu: (state) => {
+      document.body.classList.add('add-overflov');
+      state.modalVariants.isOpenBurgerMenu = true;
+    },
     closeModals: (state) => {
+      document.body.classList.remove('add-overflov');
       state.modalVariants.isOpenSuccAddModal = false;
       state.modalVariants.isOpenAddToLibraryModal = false;
       state.modalVariants.isOpenStartReadingModal = false;
+      state.modalVariants.isOpenEndBookModal = false;
+      state.modalVariants.isOpenBurgerMenu = false;
     },
   },
   extraReducers: (builder) =>
@@ -63,7 +74,7 @@ const booksSlice = createSlice({
       })
       .addCase(addFromRecomend.fulfilled, (state, { payload }) => {
         console.log(payload);
-
+        document.body.classList.add('add-overflov');
         // state.ownBooks.push(payload);
         state.modalVariants.isOpenSuccAddModal = true;
         state.isLoading = false;
@@ -85,7 +96,7 @@ const booksSlice = createSlice({
       })
       .addCase(addFromLibrary.fulfilled, (state, { payload }) => {
         console.log(payload);
-
+        document.body.classList.add('add-overflov');
         state.ownBooks.push(payload);
         state.modalVariants.isOpenSuccAddModal = true;
         state.isLoading = false;
@@ -105,6 +116,8 @@ const booksSlice = createSlice({
       })
       .addCase(finishReading.fulfilled, (state, { payload }) => {
         console.log(payload);
+        document.body.classList.add('add-overflov');
+        state.modalVariants.isOpenEndBookModal = payload.status === 'done';
 
         state.bookData = payload;
         state.isLoading = false;
@@ -158,4 +171,5 @@ export const {
   setIsOpenAddToLibraryModal,
   closeModals,
   setIsOpenStartReadingModal,
+  setIsOpenBurgerMenu,
 } = booksSlice.actions;

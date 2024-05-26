@@ -7,6 +7,7 @@ import {
 } from '../../../features/redux/books/reducer';
 import { CloseIcon } from '../../assets/icons/CloseIcon';
 import thumbsUp from '../../assets/images/png/thumbs-up-img.png';
+import booksBig from '../../assets/images/png/books-img-big.png';
 import {
   selectIsOpenAddToLibraryModal,
   selectIsOpenStartReadingModal,
@@ -16,7 +17,7 @@ import { Button } from '../Button';
 import { addFromRecomend } from '../../../features/redux/books/operations';
 import { useNavigate } from 'react-router-dom';
 
-export const Modal = ({ className, variant = 'default' }) => {
+export const Modal = ({ className, variant = 'default', size = 'small' }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const modalData = useSelector(selectModalData);
@@ -27,6 +28,7 @@ export const Modal = ({ className, variant = 'default' }) => {
     // !variant ? dispatch(setIsOpenModal()) : dispatch(closeNotifyModals());
     // document.body.classList.remove('add-overflov');
     dispatch(closeModals());
+    document.body.classList.remove('add-overflov');
   };
 
   const closeFromOverlay = (e) => {
@@ -49,6 +51,7 @@ export const Modal = ({ className, variant = 'default' }) => {
   const redirectToReading = (id) => {
     dispatch(setIsOpenStartReadingModal());
     navigate(`/reading/${id}`);
+    closeModal();
   };
 
   useEffect(() => {
@@ -103,13 +106,29 @@ export const Modal = ({ className, variant = 'default' }) => {
     </>
   );
 
+  const bookAlreadyRead = (
+    <>
+      <img
+        src={booksBig}
+        alt="the book was read"
+        className="mb-[32px] h-[70px] w-[70px]"
+      />
+      <h3 className="mb-[14px] font-[700] leading-[100%] ">The book is read</h3>
+      <p className="spa text-center leading-[129%] tracking-[-0.02em] text-gray-68">
+        It was an <span className="text-white">exciting journey</span>, where
+        each page revealed new horizons, and the characters became inseparable
+        friends.
+      </p>
+    </>
+  );
+
   return (
     <div
       onClick={closeFromOverlay}
       className="fixed left-0 top-0 h-[100vh] w-[100vw] bg-[#14141499]"
     >
       <div
-        className={`absolute left-[50%] top-[50%] box-border flex max-h-full min-h-[400px] w-full max-w-[500px] translate-x-[-50%] translate-y-[-50%] flex-col items-center overflow-y-auto rounded-[12px] bg-gray-1f p-[50px] ${className}`}
+        className={`absolute left-[50%] top-[50%] box-border flex  ${size === 'small' ? 'min-h-[290px] w-[342px]' : 'min-h-[400px] w-[500px]'} translate-x-[-50%] translate-y-[-50%] flex-col items-center overflow-y-auto rounded-[12px] bg-gray-1f p-[50px] ${className}`}
       >
         <button
           onClick={closeModal}
@@ -119,6 +138,7 @@ export const Modal = ({ className, variant = 'default' }) => {
         </button>
         {variant === 'succAdd' && succAddVariant}
         {variant === 'default' && defaultVariant}
+        {variant === 'endBook' && bookAlreadyRead}
       </div>
     </div>
   );
@@ -127,4 +147,5 @@ export const Modal = ({ className, variant = 'default' }) => {
 Modal.propTypes = {
   className: PropTypes.string,
   variant: PropTypes.string,
+  size: PropTypes.string,
 };

@@ -14,17 +14,19 @@ export const Progress = ({ changeWindow, label, bookId, children }) => {
   });
 
   return (
-    <div className="h-[651px] ">
+    <div className="">
       <div className="flex justify-between ">
         <h3 className=" text-[20px] font-[700] leading-[100%]">{label}</h3>
-        <div className="flex gap-[8px]">
-          <div onClick={() => changeWindow('Dairy')}>
-            <HourglassIcon isActive={label === 'Dairy'} />
+        {label !== 'Progress' && (
+          <div className="flex gap-[8px]">
+            <div onClick={() => changeWindow('Dairy')}>
+              <HourglassIcon isActive={label === 'Dairy'} />
+            </div>
+            <div onClick={() => changeWindow('Statistics')}>
+              <PieChartIcon isActive={label === 'Statistics'} />
+            </div>
           </div>
-          <div onClick={() => changeWindow('Statistics')}>
-            <PieChartIcon isActive={label === 'Statistics'} />
-          </div>
-        </div>
+        )}
       </div>
 
       {childrenWithProps}

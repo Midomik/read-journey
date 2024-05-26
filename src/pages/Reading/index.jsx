@@ -18,17 +18,23 @@ import {
 } from '../../features/redux/books/operations';
 import { selectBookData } from '../../features/redux/books/selectors';
 import { readingSchema } from '../../shared/ui/Form/shemas/readingSchema';
+import { MyBook } from './MyBook/MyBook';
 
 export const Reading = () => {
   const dispatch = useDispatch();
   const bookData = useSelector(selectBookData);
 
-  const [progressWindow, setProgressWindow] = useState('Dairy');
+  const [progressWindow, setProgressWindow] = useState('Progress');
+  console.log(bookData);
 
   const { bookId } = useParams();
 
   const maxFinishPage = bookData
-    ? Math.max(...bookData.progress.map((item) => item.finishPage))
+    ? Math.max(
+        ...bookData.progress
+          .map((item) => item.finishPage)
+          .filter((page) => !isNaN(page))
+      )
     : null;
 
   useEffect(() => {
@@ -38,6 +44,10 @@ export const Reading = () => {
   useEffect(() => {
     dispatch(getBookById(bookId));
   }, [dispatch]);
+
+  useEffect(() => {
+    setProgressWindow(bookData?.progress?.length === 0 ? 'Progress' : 'Dairy');
+  }, [bookData]);
 
   const onStart = (value) => {
     console.log('start');
@@ -52,12 +62,12 @@ export const Reading = () => {
   };
 
   return (
-    <div>
-      <Dashboard>
+    <div className="flex gap-[16px] mobile-sm:flex-col desktop:flex-row">
+      <Dashboard className=" tablet:flex tablet:justify-center tablet:gap-[32px] desktop:block ">
         <Form
           label="Start page:"
           submit={
-            bookData?.progress[bookData?.progress.length - 1].status ===
+            bookData?.progress[bookData?.progress.length - 1]?.status ===
             'active'
               ? onStop
               : onStart
@@ -66,14 +76,14 @@ export const Reading = () => {
           className="mb-[40px]"
         >
           <Input name="page" title="Page number:" placeholder="0" />
-          <Button className="mr-auto mt-[12px]">
-            {bookData?.progress[bookData?.progress.length - 1].status ===
+          <Button size="small" className="mr-auto mt-[12px]">
+            {bookData?.progress[bookData?.progress.length - 1]?.status ===
             'active'
               ? 'To stop'
               : 'To start'}
           </Button>
         </Form>
-        <div>
+        <div className="">
           <Progress
             bookId={bookId}
             changeWindow={setProgressWindow}
@@ -84,12 +94,17 @@ export const Reading = () => {
             {progressWindow === 'Statistics' && (
               <Statistics
                 maxFinishPage={maxFinishPage}
-                totalPages={bookData.totalPages}
+                totalPages={bookData?.totalPages}
               />
             )}
           </Progress>
         </div>
       </Dashboard>
+
+      <MyBook
+        bookData={bookData !== null ? bookData : {}}
+        timeLeftToRead={bookData?.timeLeftToRead}
+      />
     </div>
   );
 };

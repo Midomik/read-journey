@@ -15,6 +15,12 @@ export const selectIsOpenStartReadingModal = (state) =>
 export const selectIsOpenAddToLibraryModal = (state) =>
   state.library.modalVariants.isOpenAddToLibraryModal;
 
+export const selectIsOpenEndBookModal = (state) =>
+  state.library.modalVariants.isOpenEndBookModal;
+
+export const selectIsOpenBurgerMenu = (state) =>
+  state.library.modalVariants.isOpenBurgerMenu;
+
 export const selectOwnBooks = (state) => state.library.ownBooks;
 
 export const selectBookData = (state) => state.library.bookData;
