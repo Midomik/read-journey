@@ -42,7 +42,7 @@ export const Form = ({
 
   const onSubmit = (data, event) => {
     event.preventDefault();
-    // console.log(errors);
+    
     submit(data);
     isReset ? reset() : null;
   };

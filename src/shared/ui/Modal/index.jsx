@@ -26,8 +26,6 @@ export const Modal = ({ className, variant = 'default', size = 'small' }) => {
   const isOpenAddToLibraryModal = useSelector(selectIsOpenAddToLibraryModal);
 
   const closeModal = () => {
-    // !variant ? dispatch(setIsOpenModal()) : dispatch(closeNotifyModals());
-    // document.body.classList.remove('add-overflov');
     dispatch(closeModals());
     document.body.classList.remove('add-overflov');
   };

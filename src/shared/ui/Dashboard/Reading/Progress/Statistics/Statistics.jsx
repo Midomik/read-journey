@@ -5,11 +5,9 @@ import 'react-circular-progressbar/dist/styles.css';
 
 export const Statistics = ({ maxFinishPage, totalPages }) => {
   const percentage = (maxFinishPage * 100) / totalPages;
-  console.log(percentage);
 
   const isNumber = (value) => {
     const regex = /^[0-9]+(\.[0-9]+)?$/;
-    console.log(regex.test(value));
 
     return regex.test(value);
   };
@@ -30,15 +28,15 @@ export const Statistics = ({ maxFinishPage, totalPages }) => {
                 width: '100%',
                 height: '100%',
               },
-              path: { stroke: '#30b94d' }, // колір шляху прогресу
-              trail: { stroke: '#1f1f1f' }, // колір треку
+              path: { stroke: '#30b94d' }, 
+              trail: { stroke: '#1f1f1f' }, 
               text: {
                 fill: '#f9f9f9',
                 fontSize: '12px',
                 fontWeight: '700',
                 lineHeight: '100%',
                 letterSpacing: '-0.02em',
-              }, // колір та розмір тексту
+              }, 
             }}
           />
         </div>

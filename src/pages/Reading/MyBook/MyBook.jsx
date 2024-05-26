@@ -45,12 +45,6 @@ export const MyBook = ({ bookData, timeLeftToRead }) => {
 
         <div>
           {
-            /* {bookData?.progress[bookData?.progress?.length - 1].status ===
-          'active' ? (
-            <StopReadIcon />
-          ) : (
-            <StartReadIcon />
-          )} */
 
             bookData?.progress !== undefined ? (
               bookData?.progress[bookData?.progress?.length - 1]?.status ===

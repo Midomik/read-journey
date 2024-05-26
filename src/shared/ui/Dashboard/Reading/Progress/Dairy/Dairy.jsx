@@ -8,32 +8,6 @@ import { nanoid } from 'nanoid';
 export const Dairy = ({ bookId }) => {
   const bookData = useSelector(selectBookData);
   const progress = bookData?.progress;
-  //   const progress = [
-  //     {
-  //       startPage: 1,
-  //       startReading: '2023-11-11T22:49:29.590Z',
-  //       finishPage: 4,
-  //       finishReading: '2023-11-11T22:53:34.959Z',
-  //       speed: 44,
-  //       status: 'inactive',
-  //     },
-  //     {
-  //       startPage: 5,
-  //       startReading: '2023-11-11T22:53:50.853Z',
-  //       finishPage: 7,
-  //       finishReading: '2023-11-11T22:54:59.914Z',
-  //       speed: 105,
-  //       status: 'inactive',
-  //     },
-  //     {
-  //       startPage: 8,
-  //       startReading: '2023-12-11T22:53:50.853Z',
-  //       finishPage: 10,
-  //       finishReading: '2023-12-11T22:54:59.914Z',
-  //       speed: 105,
-  //       status: 'inactive',
-  //     },
-  //   ];
 
   const groupedProgress = progress?.reduce((acc, item) => {
     const date = item.startReading.slice(0, 10);
@@ -50,7 +24,7 @@ export const Dairy = ({ bookId }) => {
     }
     return acc;
   }, []);
-  console.log(groupedProgress);
+  
 
   return (
     <div className="tablet-only:w-[321px] mobile-max:max-h-[211px] tablet-max:max-h-[252px] tablet-max:overflow-y-scroll relative mt-[20px] flex w-full flex-col gap-[40px] rounded-[12px] bg-gray-26 p-[20px]  ">
@@ -111,14 +85,7 @@ export const Dairy = ({ bookId }) => {
           );
         })}
     </div>
-    // <div>
-    //   <button onClick={() => dispatch(startReading({ id: bookId, page: 6 }))}>
-    //     start
-    //   </button>
-    //   <button onClick={() => dispatch(finishReading({ id: bookId, page: 50 }))}>
-    //     finish
-    //   </button>
-    // </div>
+  
   );
 };
 

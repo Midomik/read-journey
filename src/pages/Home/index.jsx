@@ -20,7 +20,7 @@ import {
 } from '../../features/redux/books/selectors';
 import { BookCard } from '../../shared/ui/BookCard/BookCard';
 import { PaginBar } from '../../shared/ui/PaginBar';
-// import { setIsOpenModal } from '../../features/redux/books/reducer';
+
 import { Modal } from '../../shared/ui/Modal';
 import { setIsOpenAddToLibraryModal } from '../../features/redux/books/reducer';
 import booksBigImg from '../../shared/assets/images/png/books-img-big.png';
@@ -85,14 +85,12 @@ export const Home = () => {
         cleanedObj[key] = values[key];
       }
     }
-    console.log(cleanedObj);
     setFilterQuery(cleanedObj);
     dispatch(getRecomendedBooks(cleanedObj));
   };
 
   const addToLibrary = () => {
     dispatch(addFromRecomend(modalData?._id));
-    // dispatch(setIsOpenModal());
   };
 
   return (

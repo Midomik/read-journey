@@ -4,18 +4,18 @@ export default {
   theme: {
     extend: {
       screens: {
-        'mobile-sm': '320px', // Гумова верстка від 320px
+        'mobile-sm': '320px', 
 
-        'mobile-lg': '375px', // Адаптивна верстка від 375px
+        'mobile-lg': '375px', 
 
         'mobile-max': { max: '767px' },
 
-        tablet: '768px', // Планшети від 768px
+        tablet: '768px', 
 
         'tablet-max': { max: '1439px' },
         'tablet-only': { min: '768px', max: '1439px' },
 
-        desktop: '1440px', // Десктопи від 1440px
+        desktop: '1440px', 
       },
       colors: {
         white: '#f9f9f9',

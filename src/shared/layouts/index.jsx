@@ -38,11 +38,8 @@ export const SharedLayout = ({ children }) => {
   const isAuthLoading = useSelector(selectAuthLoading);
   const isBooksLoading = useSelector(selectBooksLoading);
   const userData = useSelector(selectUserData);
-  console.log(userData);
 
   const closeModal = () => {
-    // !variant ? dispatch(setIsOpenModal()) : dispatch(closeNotifyModals());
-    // document.body.classList.remove('add-overflov');
     dispatch(closeModals());
   };
 
@@ -108,13 +105,7 @@ export const SharedLayout = ({ children }) => {
       {isOpenAddToLibraryModal && <Modal size="large" />}
       {isOpenStartReadingModal && <Modal size="large" />}
 
-      {isOpenSuccAddModal && (
-        <Modal
-          variant="succAdd"
-          // className="min-h-[290px] w-[342px] justify-center"
-          size="small"
-        />
-      )}
+      {isOpenSuccAddModal && <Modal variant="succAdd" size="small" />}
       {isOpenEndBookModal && <Modal variant="endBook" size="small" />}
 
       {isOpenBurgerMenu && (
@@ -122,10 +113,7 @@ export const SharedLayout = ({ children }) => {
           onClick={closeFromOverlay}
           className="fixed left-0 top-0 h-[100vh] w-[100vw] bg-[#14141499]"
         >
-          <div
-            // className={`absolute right-0 top-0 box-border flex h-full w-1/2 translate-x-[50%] translate-y-[50%]  overflow-y-auto  bg-gray-1f`}
-            className="absolute right-0 top-0 flex h-full max-h-screen w-1/2 max-w-lg  transform flex-col justify-center overflow-hidden overflow-y-auto bg-gray-1f transition-all"
-          >
+          <div className="absolute right-0 top-0 flex h-full max-h-screen w-1/2 max-w-lg  transform flex-col justify-center overflow-hidden overflow-y-auto bg-gray-1f transition-all">
             <button
               onClick={closeModal}
               className="absolute right-[47px] top-[41px]  border-none bg-transparent"

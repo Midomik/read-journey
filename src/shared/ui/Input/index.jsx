@@ -1,29 +1,11 @@
-// import { cva } from 'class-variance-authority';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { ErrorIcon } from '../../assets/icons/ErrorIcon';
 import { SuccIcon } from '../../assets/icons/SuccIcon';
-// import { cn } from '../../lib/cn';
-
-// const inputVariants = cva(
-//   'w-full text-base text-white flex relative items-center gap-[10px]',
-//   {
-//     variants: {
-//       variant: {
-//         primary: 'bg-gray-26 rounded-[12px] h-[50px]',
-//       },
-//     },
-//     defaultVariants: {
-//       variant: 'primary',
-//     },
-//   }
-// );
 
 export const Input = ({
   name,
   title,
-  //   variant,
-  //   className,
   isRegister = true,
   type = 'text',
   eyeIcon,
@@ -36,8 +18,6 @@ export const Input = ({
   ...rest
 }) => {
   if (!register) return null;
-
-  // console.log(errors[name]?.message);
 
   useEffect(() => {
     if (!isRegister) {
@@ -69,8 +49,6 @@ export const Input = ({
             </span>
             <input
               className=" h-full w-full rounded-[12px] border-none bg-transparent placeholder:text-white focus:border-none focus:border-white focus:outline-none mobile-sm:text-[12px] mobile-sm:placeholder:text-[12px] tablet:text-[14px] tablet:placeholder:text-[14px]"
-              // className={cn(inputVariants({ variant, className }))}
-              // {...(isRegister ? { ...register(name) } : '')}
               type={type}
               autoComplete={name}
               {...register(name)}

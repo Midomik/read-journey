@@ -35,7 +35,7 @@ export const Auth = () => {
     }
     dispatch(registerThunk(data));
 
-    console.log('Register: ', data);
+    
   };
 
   const onSubmitLogin = (values) => {
@@ -45,13 +45,10 @@ export const Auth = () => {
     }
     dispatch(loginThunk(data));
 
-    console.log('login: ', data);
+   
   };
 
-  const checkPassword = (value, numb) => {
-    console.log(value);
-    console.log(numb);
-
+  const checkPassword = (value) => {
     setIsvisiblePassword(value);
   };
 

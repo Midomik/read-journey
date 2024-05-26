@@ -22,9 +22,6 @@ const authConfig = {
 
 export const store = configureStore({
   reducer: {
-    // auth: persistReducer(authConfig, authReducer),
-    // drinks: drinksReducer,
-    // filters: filtersReducer,
     auth: persistReducer(authConfig, authReducer),
     library: booksReducer,
   },

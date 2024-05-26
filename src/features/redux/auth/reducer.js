@@ -25,16 +25,12 @@ const authSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(registerThunk.fulfilled, (state, { payload }) => {
-        console.log(payload);
-
         state.token = payload.token;
         state.authenticated = true;
         state.isLoading = false;
         state.error = null;
       })
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
-        console.log(payload);
-
         state.token = payload.token;
         state.authenticated = true;
         state.isLoading = false;
@@ -62,8 +58,6 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(refreshThunk.rejected, (state, { payload }) => {
-        console.log('token: timeout', payload);
-
         state.token = null;
         state.authenticated = false;
         state.isLoading = false;

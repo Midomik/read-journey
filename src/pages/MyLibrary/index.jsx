@@ -37,17 +37,17 @@ export const MyLibrary = () => {
   }, [dispatch]);
 
   const createBook = (values) => {
-    console.log(values);
+    
     dispatch(addFromLibrary(values));
   };
 
   const onDeleteBook = (id) => {
-    // console.log(id);
+    
     dispatch(deleteOwnBook(id));
   };
 
   const getFilteredBooks = (value) => {
-    console.log(value);
+    
     const data = value === 'all' ? '' : value;
     dispatch(getOwnBooks(data));
   };

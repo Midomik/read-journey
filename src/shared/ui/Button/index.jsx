@@ -23,7 +23,6 @@ const buttonVariants = cva(
 export const Button = ({ className, children, size = 'small', ...rest }) => {
   return (
     <button
-      // className={` border-[rgba(249, 249, 249, 0.2)] rounded-[30px] border px-[28px] py-[12px] font-[700]  leading-[112%] mobile-sm:text-[14px] tablet:text-[16px]  ${className}`}
       className={cn(buttonVariants({ size, className }))}
       {...rest}
     >

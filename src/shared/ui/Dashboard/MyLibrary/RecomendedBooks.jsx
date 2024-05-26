@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { BookCard } from '../../BookCard/BookCard';
 import { useDispatch } from 'react-redux';
 import { setIsOpenAddToLibraryModal } from '../../../../features/redux/books/reducer';
-// import { setIsOpenModal } from '../../../../features/redux/books/reducer';
 
 export const RecomendedBooks = ({ books, className }) => {
   const dispatch = useDispatch();

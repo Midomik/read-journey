@@ -44,8 +44,6 @@ export const styleList = {
     },
     lineHeight: '129%',
     paddingLeft: 6,
-    // border: '1px solid rgba(25, 26, 21, 0.1)',
-    // '&:hover': { backgroundColor: 'rgba(25, 26, 21, 0.1)' },
   }),
   dropdownIndicator: (base, state) => ({
     transform: state.selectProps.menuIsOpen ? 'rotate(180deg)' : null,
@@ -81,8 +79,6 @@ export const styleList = {
   }),
   singleValue: (base) => ({
     ...base,
-
-    // fontWeight: 500,
 
     [`@media (min-width: 320px)`]: {
       fontSize: 12,

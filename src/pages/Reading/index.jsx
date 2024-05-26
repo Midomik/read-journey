@@ -25,7 +25,7 @@ export const Reading = () => {
   const bookData = useSelector(selectBookData);
 
   const [progressWindow, setProgressWindow] = useState('Progress');
-  console.log(bookData);
+  
 
   const { bookId } = useParams();
 
@@ -50,13 +50,13 @@ export const Reading = () => {
   }, [bookData]);
 
   const onStart = (value) => {
-    console.log('start');
+    
     const data = { ...value, id: bookId };
     dispatch(startReading(data));
   };
 
   const onStop = (value) => {
-    console.log('stop');
+    
     const data = { ...value, id: bookId };
     dispatch(finishReading(data));
   };

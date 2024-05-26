@@ -32,11 +32,6 @@ const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    // setIsOpenModal: (state, { payload }) => {
-    //   state.isOpenModal = !state.isOpenModal;
-    //   state.modalData = payload;
-    //   state.modalVariants.isOpenStartReadingModal = false;
-    // },
     setIsOpenAddToLibraryModal: (state, { payload }) => {
       document.body.classList.add('add-overflov');
       state.modalVariants.isOpenAddToLibraryModal = true;
@@ -65,37 +60,28 @@ const booksSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(getRecomendedBooks.fulfilled, (state, { payload }) => {
-        console.log(payload);
-
         state.pageData = payload;
         state.books = payload.results;
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(addFromRecomend.fulfilled, (state, { payload }) => {
-        console.log(payload);
+      .addCase(addFromRecomend.fulfilled, (state) => {
         document.body.classList.add('add-overflov');
-        // state.ownBooks.push(payload);
         state.modalVariants.isOpenSuccAddModal = true;
         state.isLoading = false;
         state.error = null;
       })
       .addCase(getOwnBooks.fulfilled, (state, { payload }) => {
-        // console.log(payload);
-
         state.ownBooks = payload;
         state.isLoading = false;
         state.error = null;
       })
       .addCase(deleteOwnBook.fulfilled, (state, { payload }) => {
-        console.log(payload);
-
         state.ownBooks = state.ownBooks.filter((book) => book._id !== payload);
         state.isLoading = false;
         state.error = null;
       })
       .addCase(addFromLibrary.fulfilled, (state, { payload }) => {
-        console.log(payload);
         document.body.classList.add('add-overflov');
         state.ownBooks.push(payload);
         state.modalVariants.isOpenSuccAddModal = true;
@@ -108,15 +94,11 @@ const booksSlice = createSlice({
         state.error = null;
       })
       .addCase(startReading.fulfilled, (state, { payload }) => {
-        console.log(payload);
-
         state.bookData = payload;
         state.isLoading = false;
         state.error = null;
       })
       .addCase(finishReading.fulfilled, (state, { payload }) => {
-        console.log(payload);
-        // document.body.classList.add('add-overflov');
         state.modalVariants.isOpenEndBookModal = payload.status === 'done';
 
         state.bookData = payload;
@@ -124,8 +106,6 @@ const booksSlice = createSlice({
         state.error = null;
       })
       .addCase(deleteReading.fulfilled, (state, { payload }) => {
-        console.log(payload);
-
         state.bookData = payload;
         state.isLoading = false;
         state.error = null;

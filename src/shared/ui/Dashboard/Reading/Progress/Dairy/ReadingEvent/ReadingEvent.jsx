@@ -8,13 +8,13 @@ import { deleteReading } from '../../../../../../../features/redux/books/operati
 
 export const ReadingEvent = ({ eventData, totalPages, bookId }) => {
   const dispatch = useDispatch();
-  console.log(eventData);
+  
 
   const onDeleteReading = (readingId) => {
     const data = { readingId, bookId };
     dispatch(deleteReading(data));
   };
-  console.log(totalPages);
+  
 
   return (
     <div className="flex flex-col gap-[28px]">
@@ -24,7 +24,7 @@ export const ReadingEvent = ({ eventData, totalPages, bookId }) => {
           const { startReading, finishReading, finishPage, speed, _id } = item;
 
           const partOfBook = ((finishPage * 100) / totalPages).toFixed(1);
-          console.log();
+          
 
           const differenceInMinutes = Math.floor(
             (new Date(finishReading) - new Date(startReading)) / 60000

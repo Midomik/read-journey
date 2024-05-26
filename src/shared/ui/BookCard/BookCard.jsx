@@ -44,20 +44,6 @@ export const BookCard = ({
     e.stopPropagation();
     onDelete({ id });
   };
-  // const authorVariat = cva(
-  //   'mb-[2px] overflow-hidden text-ellipsis whitespace-nowrap font-[700] leading-[129%]',
-  //   {
-  //     variants: {
-  //       size: {
-  //         large: 'text-[10px] leading-[120%] text-gray-68',
-  //         small: 'text-[10px]',
-  //       },
-  //     },
-  //     defaultVariants: {
-  //       size: 'large',
-  //     },
-  //   }
-  // );
 
   return (
     <>
