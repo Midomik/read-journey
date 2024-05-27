@@ -88,11 +88,7 @@ export const Home = () => {
     setFilterQuery(cleanedObj);
     dispatch(getRecomendedBooks(cleanedObj));
   };
-
-  const addToLibrary = () => {
-    dispatch(addFromRecomend(modalData?._id));
-  };
-
+ 
   return (
     <>
       <div className=" flex mobile-sm:flex-col mobile-sm:gap-[10px] tablet:gap-[16px] desktop:flex-row">
@@ -176,7 +172,7 @@ export const Home = () => {
           )}
         </div>
       </div>
-      {isOpenStartReadingModal && (
+      {/* {isOpenStartReadingModal && (
         <Modal>
           <img
             src={modalData?.imageUrl}
@@ -194,7 +190,7 @@ export const Home = () => {
           </p>
           <Button onClick={() => addToLibrary()}>Add to library</Button>
         </Modal>
-      )}
+      )} */}
       {isOpenSuccAddModal && (
         <Modal
           variant="succAdd"

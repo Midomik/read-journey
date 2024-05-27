@@ -21,6 +21,7 @@ import booksBigImg from '../../shared/assets/images/png/books-img-big.png';
 import { SelectUI } from '../../shared/ui/Select';
 import { createBookSchema } from '../../shared/ui/Form/shemas/createBookSchema';
 import { setIsOpenStartReadingModal } from '../../features/redux/books/reducer';
+import { Notify } from 'notiflix';
 
 export const MyLibrary = () => {
   const dispatch = useDispatch();
@@ -37,17 +38,23 @@ export const MyLibrary = () => {
   }, [dispatch]);
 
   const createBook = (values) => {
-    
+    const isBookInLibrary = onwBooks.some(
+      (book) => book?.title === values?.title
+    );
+
+    if (isBookInLibrary) {
+      return Notify.failure(`Error! This book is already in your library`, {
+        timeout: 3000,
+      });
+    }
     dispatch(addFromLibrary(values));
   };
 
   const onDeleteBook = (id) => {
-    
     dispatch(deleteOwnBook(id));
   };
 
   const getFilteredBooks = (value) => {
-    
     const data = value === 'all' ? '' : value;
     dispatch(getOwnBooks(data));
   };

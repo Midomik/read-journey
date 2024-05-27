@@ -12,16 +12,19 @@ import {
   selectIsOpenAddToLibraryModal,
   selectIsOpenStartReadingModal,
   selectModalData,
+  selectOwnBooks,
 } from '../../../features/redux/books/selectors';
 import { Button } from '../Button';
 import { addFromRecomend } from '../../../features/redux/books/operations';
 import { useNavigate } from 'react-router-dom';
 import bookPlaceholder from '../../assets/images/png/book-placeholder.png';
+import { Notify } from 'notiflix';
 
 export const Modal = ({ className, variant = 'default', size = 'small' }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const modalData = useSelector(selectModalData);
+  const ownBooks = useSelector(selectOwnBooks);
   const isOpenStartReadingModal = useSelector(selectIsOpenStartReadingModal);
   const isOpenAddToLibraryModal = useSelector(selectIsOpenAddToLibraryModal);
 
@@ -42,8 +45,18 @@ export const Modal = ({ className, variant = 'default', size = 'small' }) => {
     }
   };
 
-  const addToLibrary = (id) => {
-    dispatch(addFromRecomend(id));
+  const addToLibrary = (modalData) => {
+    const isBookInLibrary = ownBooks.some(
+      (book) => book?.title === modalData?.title
+    );
+
+    if (isBookInLibrary) {
+      return Notify.failure(`Error! This book is already in your library`, {
+        timeout: 3000,
+      });
+    }
+
+    dispatch(addFromRecomend(modalData?._id));
     closeModal();
   };
 
@@ -98,9 +111,7 @@ export const Modal = ({ className, variant = 'default', size = 'small' }) => {
       )}
 
       {isOpenAddToLibraryModal && (
-        <Button onClick={() => addToLibrary(modalData?._id)}>
-          Add to library
-        </Button>
+        <Button onClick={() => addToLibrary(modalData)}>Add to library</Button>
       )}
     </>
   );

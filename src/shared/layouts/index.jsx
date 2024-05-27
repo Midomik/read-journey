@@ -26,6 +26,7 @@ import {
   setIsOpenBurgerMenu,
 } from '../../features/redux/books/reducer';
 import { Loader } from '../ui/Loader/Loader';
+import { getOwnBooks } from '../../features/redux/books/operations';
 
 export const SharedLayout = ({ children }) => {
   const dispatch = useDispatch();
@@ -61,6 +62,10 @@ export const SharedLayout = ({ children }) => {
       window.removeEventListener('keydown', closeModalFromEsc);
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(getOwnBooks());
+  }, [dispatch]);
 
   return (
     <div>

@@ -65,13 +65,18 @@ const booksSlice = createSlice({
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(addFromRecomend.fulfilled, (state) => {
+      .addCase(addFromRecomend.fulfilled, (state, { payload }) => {
         document.body.classList.add('add-overflov');
         state.modalVariants.isOpenSuccAddModal = true;
+        state.ownBooks.push(payload);
+        
+
         state.isLoading = false;
         state.error = null;
       })
       .addCase(getOwnBooks.fulfilled, (state, { payload }) => {
+        
+
         state.ownBooks = payload;
         state.isLoading = false;
         state.error = null;

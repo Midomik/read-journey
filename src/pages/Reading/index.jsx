@@ -25,7 +25,6 @@ export const Reading = () => {
   const bookData = useSelector(selectBookData);
 
   const [progressWindow, setProgressWindow] = useState('Progress');
-  
 
   const { bookId } = useParams();
 
@@ -50,13 +49,11 @@ export const Reading = () => {
   }, [bookData]);
 
   const onStart = (value) => {
-    
     const data = { ...value, id: bookId };
     dispatch(startReading(data));
   };
 
   const onStop = (value) => {
-    
     const data = { ...value, id: bookId };
     dispatch(finishReading(data));
   };
@@ -72,7 +69,7 @@ export const Reading = () => {
               ? onStop
               : onStart
           }
-          validationSchema={readingSchema}
+          validationSchema={readingSchema(bookData?.totalPages)}
           className="mb-[40px]"
         >
           <Input name="page" title="Page number:" placeholder="0" />
