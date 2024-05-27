@@ -88,7 +88,7 @@ export const Home = () => {
     setFilterQuery(cleanedObj);
     dispatch(getRecomendedBooks(cleanedObj));
   };
- 
+
   return (
     <>
       <div className=" flex mobile-sm:flex-col mobile-sm:gap-[10px] tablet:gap-[16px] desktop:flex-row">
